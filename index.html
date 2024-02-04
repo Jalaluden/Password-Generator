@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <title>Password Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <form action="/generate_password" method="post">
+            <label for="password_length">Password Length:</label>
+            <input type="number" name="password_length" id="password_length" min="1" required>
+
+            <label>Character Sets:</label>
+            <input type="checkbox" name="use_lowercase" id="use_lowercase" checked>
+            <label for="use_lowercase">Lowercase</label>
+
+            <input type="checkbox" name="use_uppercase" id="use_uppercase" checked>
+            <label for="use_uppercase">Uppercase</label>
+
+            <input type="checkbox" name="use_digits" id="use_digits" checked>
+            <label for="use_digits">Digits</label>
+
+            <input type="checkbox" name="use_special_chars" id="use_special_chars">
+            <label for="use_special_chars">Special Characters</label>
+
+            <button type="submit">Generate Password</button>
+        </form>
+
+        {% if generated_password %}
+            <div class="result">
+                <p>Your generated password:</p>
+                <textarea readonly>{{ generated_password }}</textarea>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
